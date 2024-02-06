@@ -238,4 +238,32 @@ Password for level 13  : wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
 ## Level 13
 
 ```
+Now We login to the 13th level using 'ssh bandit13@bandit.labs.overthewire.org -p 2220' with the password as 'wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw'
+
+As mentioned on the website The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Over here it seems as though we need to login from the remote machine  we have already connected to with the username bandit14 on the localhost that is the hostname mentioned. Like we did in level0 we can use the ssh command again with 'ssh bandit14@localhost' and as all the other levels use the port numbers 2220 we will also include that as Port numbers in computer networking represent communication endpoints and its the same for every level hence the command then becomes 'ssh bandit14@local host -p 2220'. Yet now we need a password. We have a private key file stored on the bandit13 server hence after a quick search on man ssh and doing ctrl + f and searching for private SSH Key we see another command such as '-i' that Selects a file from which the identity (private key) for RSA or DSA authentication is read https://linux.die.net/man/1/ssh. Hence our final command becomes 'ssh bandit14@localhost -p 2220 -i sshkey.private'. Over here we can now see by our terminal name that we are logged onto bandit 14 and from the hint given that the file is located in '/etc/bandit_pass/bandit14' we can directly open the file with the password by using the 'cat' command followed by our address. We then get shown the password and then exit.
+
+As Shown : https://imgur.com/s6TM9gg and https://imgur.com/ngMAK00
+
+Password for Level 14 : fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+
+```
+
+## Level 14 
+
+```
+Now We login to the 13th level using 'ssh bandit13@bandit.labs.overthewire.org -p 2220' with the password as 'wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw' We then continue using the command we used to clear the last level to enter the localhost 'ssh bandit14@localhost -p 2220 -i sshkey.private'
+
+As Mentioned on the website The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost. The currents level password we found was 'fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq' Upon Glancing at the commands required for the this level and the promts it would seem that we are required to login to another remote machine this time only submitting our password to port 30000 on the hostname 'localhost' meaning we cannot use ssh like the last level. below other commands are seen to be promted to which we try doing man telnet to see an option to connect to a host with an optional password as seen https://linux.die.net/man/1/telnet. After askimg chatgpt how the command may be used we can see an option where we can use the command 'telnet hostname portnumber' to directly connect with the host and command line interface allowing for us to submit a password which was 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt' We then recieve a success prompt and a new password. We then proceed to exit as tghe connection is closed by a foreign host.
+
+As shown : https://imgur.com/a/ETaezYF
+
+```
+
+## Level 15
+
+```
+Now We login to level 15 using 'ssh bandit15@bandit.labs.overthewire.org -p 2220' with the password as 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt'.
+
+As mentioned on the website The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. When Looking at the commands prompted to us below we can see the option oopenssl. upon opening the man openssl we can see that the openssl command opens the commandline tool for ssl. We are required to connect with a server using ssl encryption with the server name local host and the port 30001.
+
 ```
