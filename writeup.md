@@ -251,6 +251,7 @@ Password for Level 14 : fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
 ## Level 14 
 
 ```
+
 Now We login to the 13th level using 'ssh bandit13@bandit.labs.overthewire.org -p 2220' with the password as 'wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw' We then continue using the command we used to clear the last level to enter the localhost 'ssh bandit14@localhost -p 2220 -i sshkey.private'
 
 As Mentioned on the website The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost. The currents level password we found was 'fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq' Upon Glancing at the commands required for the this level and the promts it would seem that we are required to login to another remote machine this time only submitting our password to port 30000 on the hostname 'localhost' meaning we cannot use ssh like the last level. below other commands are seen to be promted to which we try doing man telnet to see an option to connect to a host with an optional password as seen https://linux.die.net/man/1/telnet. After askimg chatgpt how the command may be used we can see an option where we can use the command 'telnet hostname portnumber' to directly connect with the host and command line interface allowing for us to submit a password which was 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt' We then recieve a success prompt and a new password. We then proceed to exit as tghe connection is closed by a foreign host.
@@ -262,8 +263,23 @@ As shown : https://imgur.com/a/ETaezYF
 ## Level 15
 
 ```
+
 Now We login to level 15 using 'ssh bandit15@bandit.labs.overthewire.org -p 2220' with the password as 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt'.
 
-As mentioned on the website The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. When Looking at the commands prompted to us below we can see the option oopenssl. upon opening the man openssl we can see that the openssl command opens the commandline tool for ssl. We are required to connect with a server using ssl encryption with the server name local host and the port 30001.
+As mentioned on the website The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. When Looking at the commands prompted to us below we can see the option openssl. upon opening the man openssl we can see that the openssl command opens the commandline tool for ssl. We are required to connect with a server using ssl encryption with the server name local host and the port 30001.
+Upon taking help online from a writeup and the official discord server i was provided with the supposed command of 'openssl s_client -connect localhost:30001' Upon researching one can find the openssl as a open-source library that provides support for SSL/TLS protocols. The s_client signifies OpenSSL tool should act as an SSL/TLS client to commit to using SSL encrytption next we have the hostname + port.
+After entering this command we are then promted to recieve a password to recieve our next password which we enter as 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt'. After which we recieve a correct promt and recieve the password for the next level. It then stops the ssl connection
+
+As Shown : https://imgur.com/a/8oAIIty
+
+Password for Level 16 - 'JQttfApK4SeyHwDlI9SXGR50qclOAil1'
 
 ```
+
+## Level 16
+
+```
+
+Now We login to level 16 using 'ssh bandit16@bandit.labs.overthewire.org -p 2220' with the password as 'JQttfApK4SeyHwDlI9SXGR50qclOAil1'.
+
+
