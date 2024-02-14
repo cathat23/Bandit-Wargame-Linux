@@ -334,3 +334,16 @@ As SHown : https://imgur.com/tbTXcMu
 Password for next Level : 'hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg'
 
 ```
+
+## Level 18
+
+```
+Now We login to level 16 using 'ssh bandit17@bandit.labs.overthewire.org -p 2220' with the password as 'hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg'. To which we are instantly logged out.
+
+we are promted on the website that the password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH. Hence as a way to do commands in rapid succession we just put the 'cat readme' command after our ssh command to connect and get our password instantly. I had to go online to find an exploit around this. We then recieve the password while being logged out.
+'awhqfNnAbc1naukrpqDYcF95h7HoMTrC'
+
+As Shown : https://imgur.com/bU9wry4
+
+Password for next level : 'awhqfNnAbc1naukrpqDYcF95h7HoMTrC'
+```
