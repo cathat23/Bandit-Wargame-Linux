@@ -280,6 +280,57 @@ Password for Level 16 - 'JQttfApK4SeyHwDlI9SXGR50qclOAil1'
 
 ```
 
+
 Now We login to level 16 using 'ssh bandit16@bandit.labs.overthewire.org -p 2220' with the password as 'JQttfApK4SeyHwDlI9SXGR50qclOAil1'.
 
+As mentioned on the website The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. To which only some of these will speak SSL while the others only take in the input and return it to you.
+We look at the promted commands to use and we can see the Nmap command which is a command used for network exploration and security auditing as seen here. https://linux.die.net/man/1/nmap. To scan the specific ports we can use the -p command with the range 31000 - 320000. We also must search for these ports on the localhost hence our final command becomes 'nmap localhost -p 31000-32000'. After which we are returned 5 ports that run the protocol and are currently open.
+Now we again need to filter through these hosts to find ones that speak SSl so we use the options -sV as it allows us to understand the service version of the port. We also use the -T4 option in Nmap as sets the timing template for the scan. It determines the speed and aggressiveness of the scan. The -T4 timing template is one of several available options, and it strikes a balance between speed and thoroughness. and instead of doing a range like last time we can list out each individual port. hence our cmmand becomes 'nmap localhost -p 31046,31518,31691,31790,31960 -sV -T4'
+Upon the returning we see 2 specific ports have SSL as a service hence we need to try connecting to both these ports using the openssl command that we used in the last level. Upon opening the first port level ssl we are seen that we are just being returned our input as output and if looking at the service specified we can see it says SSL/Echo that signifies it will return whatever input. Hence we connect to the other port whith the specific command 'openssl s_client -connect localhost:31790' To which we can then submit the password for this level which is 'JQttfApK4SeyHwDlI9SXGR50qclOAil1' to which we then recieve a RSA private key  which is
 
+'-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----'
+
+Now Like the 12th level we go the temp directorary by using the 'cd /tmp' and make our own directory using 'mkdir hadakoibald' To which we then enter the directory by using 'cd hadakoibald'.
+Over here we can save our rsa key by using the nano command off this 'https://www.geeksforgeeks.org/nano-text-editor-in-linux/' to which we use 'nano key' and paste our rsa key in it to which we then just press Ctrl+o to save. Upon doing ls -al we can see that the private key is visible to all people and that should not be possible as it acts like a public key. Hence we must change the permission of the file upon searching online i found this https://www.youtube.com/watch?v=D3YY1RJKzrA to change the permissions of a 'chmod 600 key' where 6 refers to read and write only and 0 means nothing for groups and 0 for people. Now i need to login to the next level usign this key file to which i was promted by someone on the discord server to learn what the command ssh -i command is which literally allows us to directly submit one of our files as the password when connecting to the next level. hence we use the command 'ssh -i key bandit17@localhost -p 2220' as we hare promted to connect on a localhost to which we are then promplty logged in and hence cleared the leve.
+
+As Shown : https://imgur.com/8Qu9YTm
+
+```
+
+## Level 17 
+
+```
+
+As we are already connected from the last level. We then see on the website to be promted There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new. We are also promted several set of commands and the command that stood out the the most was the difference command. First i use the ls command to see what files are in the directory. After confirming the 2 files present we can then use the diff command to which we are returned 2 lines of passwords depending on which order we used the file names in the diff command 'diff passwords.new passwords.old' we see the password was different in the new file and then the password in the old file. the password we recieve is 'hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg' We then exit level 17 and 18 to then connect to level 18.
+
+As SHown : https://imgur.com/tbTXcMu
+
+Password for next Level : 'hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg'
+
+```
